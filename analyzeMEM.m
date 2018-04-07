@@ -44,7 +44,21 @@ else
 end
 
 MEM = pow2db(resp_freq ./ bline_freq);
-cols = jet(size(MEM, 1));
+
+cols = [103,0,31;
+178,24,43;
+214,96,77;
+244,165,130;
+253,219,199;
+247, 247, 247;
+209,229,240;
+146,197,222;
+67,147,195;
+33,102,172;
+5,48,97];
+cols = cols(end:-1:1, :)/255;
+
+% cols = jet(size(MEM, 1));
 axes('NextPlot','replacechildren', 'ColorOrder',cols);
 semilogx(freq / 1e3, MEM, 'linew', 2);
 xlim([0.2, 8]);
