@@ -1,7 +1,11 @@
 clear;
 close all;
 clc;
-load('/Users/hari/Desktop/MEMRpilot/S006/Calib_Ph1ER-10X_S006REar_23-Oct-2018_15_39_19.mat')
+
+[FileName,PathName,~] = uigetfile(strcat('Calib_*.mat'),...
+    'Please pick calib file to analyze');
+Cfile = fullfile(PathName, FileName);
+load(Cfile);
 fcalib = calib.freq;
 
 [FileName,PathName,FilterIndex] = uigetfile(strcat('MEMR_*.mat'),...
@@ -10,6 +14,7 @@ MEMfile = fullfile(PathName, FileName);
 load(MEMfile);
 
 endsamps = ceil(stim.clickwin*stim.Fs*1e-3) + 1;
+% It is assumed that the calib file has this length for all recordings
 
 freq = linspace(200, 4000, 1024);
 MEMband = [500, 2000];
